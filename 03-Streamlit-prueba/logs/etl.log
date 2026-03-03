@@ -46,3 +46,9 @@
 2026-03-02 19:43:28,621 - INFO - ✅ Datos extraídos para Cartagena
 2026-03-02 19:43:30,624 - INFO - 📁 Datos guardados en data/clima_raw.json
 2026-03-02 19:43:30,630 - INFO - 📁 Datos guardados en data/clima.csv
+2026-03-02 23:03:44,361 - INFO - ✅ Datos extraídos: Bogota
+2026-03-02 23:03:46,942 - INFO - ✅ Datos extraídos: Medellin
+2026-03-02 23:03:49,578 - INFO - ✅ Datos extraídos: Cali
+2026-03-02 23:03:52,175 - INFO - ✅ Datos extraídos: Barranquilla
+2026-03-02 23:03:54,872 - INFO - ✅ Datos extraídos: Cartagena
+2026-03-02 23:03:56,879 - INFO - 📁 Archivo data/clima.csv actualizado con éxito.

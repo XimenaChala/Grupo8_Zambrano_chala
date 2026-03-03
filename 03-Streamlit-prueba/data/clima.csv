@@ -1,6 +1,6 @@
 ciudad,pais,latitud,longitud,temperatura,sensacion_termica,humedad,velocidad_viento,descripcion,fecha_extraccion,codigo_tiempo
-Bogota,Colombia,4.600,-74.083,17,17,83,8,Partly cloudy,2026-03-02T19:43:16.644170,116
-Medellin,Colombia,6.291,-75.536,24,27,69,5,Partly cloudy,2026-03-02T19:43:19.408571,116
-Cali,Colombia,3.437,-76.523,27,32,66,7,Overcast,2026-03-02T19:43:22.172795,122
-Barranquilla,Colombia,10.964,-74.796,28,33,74,38,Clear ,2026-03-02T19:43:25.960833,113
-Cartagena,Colombia,10.400,-75.514,29,35,70,35,Partly cloudy,2026-03-02T19:43:28.622922,116
+Bogota,Colombia,4.600,-74.083,14,14,88,6,Partly cloudy,2026-03-02 23:03:44,116
+Medellin,Colombia,6.291,-75.536,16,16,94,4,Partly cloudy,2026-03-02 23:03:46,116
+Cali,Colombia,3.437,-76.523,22,25,83,4,Patchy rain nearby,2026-03-02 23:03:49,176
+Barranquilla,Colombia,10.964,-74.796,27,31,79,35,Clear ,2026-03-02 23:03:52,113
+Cartagena,Colombia,10.400,-75.514,27,31,84,34,Clear ,2026-03-02 23:03:54,113
