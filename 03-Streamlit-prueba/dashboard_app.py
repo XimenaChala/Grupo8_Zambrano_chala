@@ -1,15 +1,18 @@
 #!/usr/bin/env python3
 import streamlit as st
 import pandas as pd
+from scripts.database import engine
 import plotly.express as px
 import plotly.graph_objects as go
 from datetime import datetime, timedelta
 import sys
 sys.path.insert(0, '.')
+from scripts.database import engine
 
 from scripts.database import SessionLocal
 from scripts.models import Ciudad, RegistroClima, MetricasETL
 
+df = pd.read_sql("SELECT * FROM clima", engine)
 # Configuración de la página
 st.set_page_config(
     page_title="Dashboard de Clima ETL",

@@ -7,6 +7,13 @@ from datetime import datetime, timedelta
 from sqlalchemy import func
 import sys
 sys.path.insert(0, '.')
+import os
+from dotenv import load_dotenv
+
+load_dotenv()
+
+DATABASE_URL = os.getenv("DATABASE_URL")
+
 
 from scripts.database import SessionLocal
 from scripts.models import Ciudad, RegistroClima, MetricasETL
