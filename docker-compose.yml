@@ -10,7 +10,7 @@ services:
        POSTGRES_PASSWORD: etl_pass
        POSTGRES_DB: weatherstack_dw
     ports:
-      - "5433:5433"
+      - "5433:5432"
     volumes:
       - postgres_data:/var/lib/postgresql/data
 
