@@ -1,0 +1,40 @@
+2026-02-20 14:21:58,599 - INFO - Iniciando extracción para 5 ciudades...
+2026-02-20 14:21:58,956 - INFO - ✅ Datos extraídos para Bogota
+2026-02-20 14:21:59,247 - ERROR - ❌ Error extrayendo datos para Medellin: 429 Client Error: Too Many Requests for url: https://api.weatherstack.com/current?access_key=c5f11171e79de9739252f509742d6b92&query=Medellin
+2026-02-20 14:21:59,550 - ERROR - ❌ Error extrayendo datos para Cali: 429 Client Error: Too Many Requests for url: https://api.weatherstack.com/current?access_key=c5f11171e79de9739252f509742d6b92&query=Cali
+2026-02-20 14:21:59,980 - INFO - ✅ Datos extraídos para Barranquilla
+2026-02-20 14:22:00,389 - ERROR - ❌ Error extrayendo datos para Cartagena: 429 Client Error: Too Many Requests for url: https://api.weatherstack.com/current?access_key=c5f11171e79de9739252f509742d6b92&query=Cartagena
+2026-02-20 14:22:00,391 - INFO - 📁 Datos guardados en data/clima_raw.json
+2026-02-20 14:22:00,394 - INFO - 📁 Datos guardados en data/clima.csv
+2026-02-20 14:23:27,464 - INFO - Iniciando extracción para 5 ciudades...
+2026-02-20 14:23:27,830 - INFO - ✅ Datos extraídos para Bogota
+2026-02-20 14:23:28,092 - ERROR - ❌ Error extrayendo datos para Medellin: 429 Client Error: Too Many Requests for url: https://api.weatherstack.com/current?access_key=c5f11171e79de9739252f509742d6b92&query=Medellin
+2026-02-20 14:23:28,395 - ERROR - ❌ Error extrayendo datos para Cali: 429 Client Error: Too Many Requests for url: https://api.weatherstack.com/current?access_key=c5f11171e79de9739252f509742d6b92&query=Cali
+2026-02-20 14:23:28,670 - ERROR - ❌ Error extrayendo datos para Barranquilla: 429 Client Error: Too Many Requests for url: https://api.weatherstack.com/current?access_key=c5f11171e79de9739252f509742d6b92&query=Barranquilla
+2026-02-20 14:23:28,977 - INFO - ✅ Datos extraídos para Cartagena
+2026-02-20 14:23:28,980 - INFO - 📁 Datos guardados en data/clima_raw.json
+2026-02-20 14:23:28,983 - INFO - 📁 Datos guardados en data/clima.csv
+2026-02-20 14:27:21,149 - INFO - Iniciando extracción para 5 ciudades...
+2026-02-20 14:27:21,706 - INFO - ✅ Datos extraídos para Bogota
+2026-02-20 14:27:21,960 - ERROR - ❌ Error extrayendo datos para Medellin: 429 Client Error: Too Many Requests for url: https://api.weatherstack.com/current?access_key=c5f11171e79de9739252f509742d6b92&query=Medellin
+2026-02-20 14:27:22,238 - ERROR - ❌ Error extrayendo datos para Cali: 429 Client Error: Too Many Requests for url: https://api.weatherstack.com/current?access_key=c5f11171e79de9739252f509742d6b92&query=Cali
+2026-02-20 14:27:22,831 - INFO - ✅ Datos extraídos para Barranquilla
+2026-02-20 14:27:23,078 - ERROR - ❌ Error extrayendo datos para Cartagena: 429 Client Error: Too Many Requests for url: https://api.weatherstack.com/current?access_key=c5f11171e79de9739252f509742d6b92&query=Cartagena
+2026-02-20 14:27:23,081 - INFO - 📁 Datos guardados en data/clima_raw.json
+2026-02-20 14:27:23,084 - INFO - 📁 Datos guardados en data/clima.csv
+2026-02-20 14:31:35,294 - INFO - Iniciando extracción para 5 ciudades...
+2026-02-20 14:31:35,581 - INFO - ✅ Datos extraídos para Bogota
+2026-02-20 14:31:38,019 - INFO - ✅ Datos extraídos para Medellin
+2026-02-20 14:31:40,322 - INFO - ✅ Datos extraídos para Cali
+2026-02-20 14:31:42,730 - INFO - ✅ Datos extraídos para Barranquilla
+2026-02-20 14:31:45,028 - INFO - ✅ Datos extraídos para Cartagena
+2026-02-20 14:31:47,032 - INFO - 📁 Datos guardados en data/clima_raw.json
+2026-02-20 14:31:47,036 - INFO - 📁 Datos guardados en data/clima.csv
+2026-02-20 14:36:01,925 - INFO - Iniciando extracción para 5 ciudades...
+2026-02-20 14:36:02,564 - INFO - ✅ Datos extraídos para Bogota
+2026-02-20 14:36:05,187 - INFO - ✅ Datos extraídos para Medellin
+2026-02-20 14:36:07,746 - INFO - ✅ Datos extraídos para Cali
+2026-02-20 14:36:10,409 - INFO - ✅ Datos extraídos para Barranquilla
+2026-02-20 14:36:12,969 - INFO - ✅ Datos extraídos para Cartagena
+2026-02-20 14:36:14,972 - INFO - 📁 Datos guardados en data/clima_raw.json
+2026-02-20 14:36:14,977 - INFO - 📁 Datos guardados en data/clima.csv
