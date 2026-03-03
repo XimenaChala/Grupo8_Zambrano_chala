@@ -1,17 +1,16 @@
 #!/usr/bin/env python3
-import os
-import time
+"""
+Extractor: Consulta la API de Weatherstack y guarda los datos en CSV y JSON.
+Uso local: python scripts/extractor.py
+"""
+import os, time, json, logging
 import requests
-import json
 import pandas as pd
 from datetime import datetime
 from dotenv import load_dotenv
-import logging
 
-# Cargar variables de entorno
 load_dotenv()
 
-# Configurar logging
 logging.basicConfig(
     level=logging.INFO,
     format='%(asctime)s - %(levelname)s - %(message)s',
@@ -22,104 +21,84 @@ logging.basicConfig(
 )
 logger = logging.getLogger(__name__)
 
+
 class WeatherstackExtractor:
     def __init__(self):
-        self.api_key = os.getenv('API_KEY')
-        self.base_url = os.getenv('WEATHERSTACK_BASE_URL')
-        self.ciudades = os.getenv('CIUDADES').split(',')
+        self.api_key  = os.getenv('API_KEY')
+        self.base_url = os.getenv('WEATHERSTACK_BASE_URL', 'http://api.weatherstack.com')
+        self.ciudades = os.getenv('CIUDADES', 'Bogota').split(',')
 
         if not self.api_key:
             raise ValueError("API_KEY no configurada en .env")
 
-    def extraer_clima(self, ciudad):
-        """Extrae datos de clima para una ciudad específica"""
+    def extraer_ciudad(self, ciudad: str) -> dict | None:
         try:
-            url = f"{self.base_url}/current"
-            params = {
-                'access_key': self.api_key,
-                'query': ciudad.strip()
-            }
-
-            response = requests.get(url, params=params, timeout=10)
+            response = requests.get(
+                f"{self.base_url}/current",
+                params={'access_key': self.api_key, 'query': ciudad.strip()},
+                timeout=10
+            )
             response.raise_for_status()
-
             data = response.json()
 
             if 'error' in data:
-                logger.error(f"❌ Error en API para {ciudad}: {data['error']['info']}")
+                logger.error(f"❌ Error API ({ciudad}): {data['error']['info']}")
                 return None
 
-            logger.info(f"✅ Datos extraídos para {ciudad}")
+            logger.info(f"✅ Datos extraídos: {ciudad}")
             return data
 
         except Exception as e:
-            logger.error(f"❌ Error extrayendo datos para {ciudad}: {str(e)}")
+            logger.error(f"❌ Error conexión ({ciudad}): {e}")
             return None
 
-    def procesar_respuesta(self, response_data):
-        """Procesa la respuesta JSON a formato estructurado"""
+    def procesar(self, data: dict) -> dict | None:
         try:
-            current = response_data.get('current', {})
-            location = response_data.get('location', {})
-
+            curr = data.get('current', {})
+            loc  = data.get('location', {})
             return {
-                'ciudad': location.get('name'),
-                'pais': location.get('country'),
-                'latitud': location.get('lat'),
-                'longitud': location.get('lon'),
-                'temperatura': current.get('temperature'),
-                'sensacion_termica': current.get('feelslike'),
-                'humedad': current.get('humidity'),
-                'velocidad_viento': current.get('wind_speed'),
-                'descripcion': current.get('weather_descriptions', ['N/A'])[0],
-                'fecha_extraccion': datetime.now().isoformat(),
-                'codigo_tiempo': current.get('weather_code')
+                'ciudad':            loc.get('name'),
+                'pais':              loc.get('country'),
+                'latitud':           loc.get('lat'),
+                'longitud':          loc.get('lon'),
+                'temperatura':       curr.get('temperature'),
+                'sensacion_termica': curr.get('feelslike'),
+                'humedad':           curr.get('humidity'),
+                'velocidad_viento':  curr.get('wind_speed'),
+                'descripcion':       curr.get('weather_descriptions', ['N/A'])[0],
+                'fecha_extraccion':  datetime.now().strftime('%Y-%m-%d %H:%M:%S'),
+                'codigo_tiempo':     curr.get('weather_code')
             }
-
         except Exception as e:
-            logger.error(f"Error procesando respuesta: {str(e)}")
+            logger.error(f"Error procesando dato: {e}")
             return None
 
-    def ejecutar_extraccion(self):
-        """Ejecuta la extracción para todas las ciudades"""
-        datos_extraidos = []
-
+    def ejecutar(self) -> list[dict]:
         logger.info(f"Iniciando extracción para {len(self.ciudades)} ciudades...")
-
+        resultados = []
         for ciudad in self.ciudades:
-            response = self.extraer_clima(ciudad)
-
-            if response:
-                datos_procesados = self.procesar_respuesta(response)
-
-                if datos_procesados:
-                    datos_extraidos.append(datos_procesados)
-
-                time.sleep(2)  # ⏱ evita el error 429 en plan FREE
-
-        return datos_extraidos
+            dato = self.extraer_ciudad(ciudad)
+            if dato:
+                procesado = self.procesar(dato)
+                if procesado:
+                    resultados.append(procesado)
+            time.sleep(2)  # evita error 429 en plan FREE
+        return resultados
 
 
 if __name__ == "__main__":
-    try:
-        extractor = WeatherstackExtractor()
-        datos = extractor.ejecutar_extraccion()
+    ext    = WeatherstackExtractor()
+    datos  = ext.ejecutar()
 
-        # Guardar como JSON
+    if datos:
+        os.makedirs('data', exist_ok=True)
+
         with open('data/clima_raw.json', 'w') as f:
-            json.dump(datos, f, indent=2)
-        logger.info("📁 Datos guardados en data/clima_raw.json")
+            json.dump(datos, f, indent=2, ensure_ascii=False)
+        logger.info("📁 Guardado: data/clima_raw.json")
 
-        # Guardar como CSV
         df = pd.DataFrame(datos)
         df.to_csv('data/clima.csv', index=False)
-        logger.info("📁 Datos guardados en data/clima.csv")
-
-        print("\n" + "="*50)
-        print("RESUMEN DE EXTRACCIÓN")
-        print("="*50)
-        print(df.to_string())
-        print("="*50)
-
-    except Exception as e:
-        logger.error(f"Error en extracción: {str(e)}")
+        logger.info("📁 Guardado: data/clima.csv")
+    else:
+        logger.warning("⚠️ No se obtuvieron datos.")
