@@ -1,112 +1,152 @@
-# ETL Weatherstack - Extracción de Datos de Clima
+# 🌤️ ETL Weatherstack - Dashboard de Clima
 
-Proyecto de Minería de Datos que implementa un pipeline ETL completo para 
-extraer, transformar y cargar datos de clima usando Weatherstack API.
+Proyecto ETL completo que extrae datos de clima desde la API de Weatherstack,
+los transforma y los visualiza en dashboards interactivos con Streamlit.
 
-## 🎯 Objetivo
+> **Estado:** ✅ En producción | **Despliegue:** Streamlit Cloud | **Python:** 3.12
 
-Aprender las 4 fases de un proceso ETL profesional:
-1. **Extract** - Obtener datos de APIs externas
-2. **Transform** - Procesar y normalizar datos
-3. **Load** - Almacenar en múltiples formatos
-4. **Visualize** - Analizar y presentar resultados
+---
 
-## 🚀 Quick Start
+## 🚀 Demo
 
-### Requisitos
-- Python 3.11+
-- pip
-- Git
+[![Streamlit App](https://static.streamlit.io/badges/streamlit_badge_black_white.svg)](https://grupo8zambranochala-3xdpkjdxp8rxvmqcdr2cbj.streamlit.app/)
 
-### Instalación
-
-```bash
-# Clonar repositorio
-git clone https://github.com/tu_usuario/etl-weatherstack.git
-cd etl-weatherstack
-
-# Crear entorno virtual
-python3 -m venv venv
-source venv/bin/activate  # En Windows: .\venv\Scripts\Activate.ps1
-
-# Instalar dependencias
-pip install -r requirements.txt
-
-# Configurar API key
-echo "API_KEY=tu_api_key_aqui" > .env
-```
-
-### Ejecutar el Pipeline
-
-```bash
-python scripts/extractor.py
-```
-
-## 📊 Salida del Pipeline
-
-El script genera:
-- `data/clima.csv` - Datos en formato CSV
-- `data/clima_raw.json` - Datos en formato JSON
-- `data/clima_analysis.png` - Gráficas de análisis
-- `logs/etl.log` - Registro de ejecución
+---
 
 ## 📁 Estructura del Proyecto
 
 ```
-etl-weatherstack/
+03-Streamlit-prueba/
+│
+├── dashboard_interactive.py   ⭐ App principal (Streamlit Cloud)
+├── dashboard_app.py            Dashboard básico
+├── dashboard_advanced.py       Dashboard con análisis avanzado
+│
 ├── scripts/
-│   ├── extractor.py      # Extrae datos de la API
-│   ├── transformador.py  # Procesa los datos
-│   └── visualizador.py   # Genera gráficas
-├── data/                 # Salida (CSV, JSON, PNG)
-├── logs/                 # Registros de ejecución
-├── .env                  # Variables de entorno (no commitear)
-├── requirements.txt      # Dependencias Python
-└── README.md            # Este archivo
+│   ├── __init__.py
+│   ├── database.py             Conexión a PostgreSQL (nube/local)
+│   ├── models.py               Modelos SQLAlchemy
+│   ├── extractor.py            Extrae API → CSV/JSON
+│   ├── extractor_db.py         Extrae API → carga directo a DB
+│   ├── consultas.py            Queries SQL reutilizables
+│   └── test_db.py              Prueba de conexión a la DB
+│
+├── data/
+│   ├── clima.csv               Respaldo de datos
+│   └── clima_raw.json          Datos crudos de la API
+│
+├── logs/
+│   └── etl.log                 Registro de ejecuciones ETL
+│
+├── .streamlit/
+│   ├── config.toml             Tema oscuro y configuración
+│   └── secrets.toml            ⚠️ Credenciales (NO se sube a GitHub)
+│
+├── requirements.txt
+├── runtime.txt
+├── .gitignore
+└── README.md
 ```
 
-## 🔑 Obtener API Key
+---
 
-1. Ve a [weatherstack.com](https://weatherstack.com)
-2. Registrate y verifica tu email
-3. En el dashboard, copia tu Access Key
-4. Pega en `.env` como `API_KEY=tu_clave`
+## ⚙️ Instalación Local
 
-## 📚 Conceptos Aprendidos
+```bash
+# 1. Clonar el repositorio
+git clone https://github.com/XimenaChala/Grupo8_Zambrano_chala.git
+cd Grupo8_Zambrano_chala/03-Streamlit-prueba
 
-- **ETL Pipeline**: Ciclo de vida completo de datos
-- **APIs REST**: Consumir servicios web externos
-- **Python Avanzado**: Logging, manejo de errores, env vars
-- **Versionamiento**: Git y GitHub para colaboración
-- **Análisis de Datos**: Pandas, Matplotlib, Visualización
-- **Buenas Prácticas**: Docstring, type hints, testing
+# 2. Crear y activar entorno virtual
+python -m venv venv
+source venv/bin/activate        # Windows: .\venv\Scripts\Activate.ps1
+
+# 3. Instalar dependencias
+pip install -r requirements.txt
+```
+
+Crea un archivo `.env` en `03-Streamlit-prueba/`:
+
+```env
+API_KEY=tu_api_key_de_weatherstack
+WEATHERSTACK_BASE_URL=http://api.weatherstack.com
+CIUDADES=Bogota,Medellin,Cali,Barranquilla,Cartagena
+DATABASE_URL=postgresql+psycopg://etl_user:etl_pass@localhost:5433/weatherstack_dw
+```
+
+---
+
+## ▶️ Uso
+
+```bash
+# Extraer datos de la API → guarda en CSV/JSON
+python scripts/extractor.py
+
+# Extraer y cargar directo a PostgreSQL
+python scripts/extractor_db.py
+
+# Probar conexión a la base de datos
+python scripts/test_db.py
+
+# Lanzar el dashboard localmente
+streamlit run dashboard_interactive.py
+```
+
+Se abre en: `http://localhost:8501`
+
+---
+
+## ☁️ Despliegue en Streamlit Cloud
+
+1. Sube el proyecto a GitHub
+2. En [Streamlit Cloud](https://streamlit.io/cloud) → **New app**
+3. Selecciona el archivo principal: `03-Streamlit-prueba/dashboard_interactive.py`
+4. En **Settings → Secrets** agrega:
+
+```toml
+DATABASE_URL = "postgresql+psycopg://usuario:password@host:puerto/dbname"
+```
+
+> Si no hay base de datos configurada, el dashboard usa automáticamente
+> `data/clima.csv` como respaldo.
+
+---
+
+## 📊 Dashboards Disponibles
+
+| Archivo | Descripción |
+|---|---|
+| `dashboard_interactive.py` | ⭐ Principal — filtros, KPIs, gráficas, descarga CSV |
+| `dashboard_app.py` | Vista rápida y sencilla de los datos |
+| `dashboard_advanced.py` | Análisis histórico + métricas de ejecución ETL |
+
+---
 
 ## 🛠️ Tecnologías
 
-- Python 3.11
-- requests (HTTP client)
-- pandas (Data processing)
-- matplotlib (Visualization)
-- python-dotenv (Environment variables)
-- Git/GitHub (Version control)
+| Categoría | Herramientas |
+|---|---|
+| Lenguaje | Python 3.12 |
+| Dashboard | Streamlit, Plotly |
+| Datos | Pandas, NumPy |
+| Base de datos | PostgreSQL, SQLAlchemy, psycopg v3 |
+| ETL | Requests, python-dotenv |
+| Control de versiones | Git, GitHub |
+| Despliegue | Streamlit Cloud |
 
-## 👨‍💻 Autor
+---
 
-Tu Nombre - Ingeniería de Sistemas - CORHUILA
+## 👩‍💻 Autores
+
+**Grupo 8** — Zambrano & Chala  
+Ingeniería de Sistemas — CORHUILA  
+
+---
 
 ## 📝 Licencia
 
-Este proyecto está bajo licencia MIT - ver LICENSE.md
-
-## 🤝 Contribuciones
-
-Si deseas mejorar este proyecto:
-1. Haz fork del repositorio
-2. Crea una rama para tu mejora
-3. Commit tus cambios
-4. Push a la rama
-5. Abre un Pull Request
+Este proyecto está bajo licencia MIT.
 
 ---
-**Última actualización:** Febrero 2026
-**Estado:** En desarrollo ✅
+
+*Última actualización: Marzo 2026*
