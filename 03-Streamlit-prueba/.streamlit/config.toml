@@ -1,10 +1,9 @@
-cat > .streamlit/config.toml << 'EOF'
 [theme]
-primaryColor       = "#1f77b4"
-backgroundColor    = "#ffffff"
+primaryColor = "#1f77b4"
+backgroundColor = "#ffffff"
 secondaryBackgroundColor = "#f0f2f6"
-textColor          = "#262730"
-font               = "sans serif"
+textColor = "#262730"
+font = "sans serif"
 
 [server]
 headless = true

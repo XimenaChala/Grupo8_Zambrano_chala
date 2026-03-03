@@ -1,13 +1,14 @@
 #!/usr/bin/env python3
+import os, sys
 import streamlit as st
 import pandas as pd
-from scripts.database import engine
 import plotly.express as px
-from datetime import datetime, timedelta
+from datetime import datetime
 
-# ------------------- Configuración -------------------
+sys.path.insert(0, os.path.abspath(os.path.dirname(__file__)))
+
 st.set_page_config(
-    page_title="Dashboard Interactivo",
+    page_title="Dashboard Clima ETL",
     page_icon="🎛️",
     layout="wide"
 )
@@ -15,131 +16,101 @@ st.set_page_config(
 st.title("🎛️ Dashboard Interactivo - Clima Weatherstack")
 st.markdown("---")
 
-# ------------------- Leer datos desde PostgreSQL -------------------
-df = pd.read_sql("SELECT * FROM clima;", engine)
+@st.cache_data(ttl=300)
+def cargar_datos() -> pd.DataFrame:
+    # Intentar conexión a DB
+    try:
+        from scripts.database import engine
+        df = pd.read_sql("SELECT * FROM clima ORDER BY fecha_extraccion DESC;", engine)
+        if not df.empty:
+            return df
+    except Exception:
+        pass
+    # Respaldo: CSV local
+    csv_path = os.path.join(os.path.dirname(__file__), 'data', 'clima.csv')
+    if os.path.exists(csv_path):
+        return pd.read_csv(csv_path)
+    return pd.DataFrame()
+
+df = cargar_datos()
 
 if df.empty:
-    st.warning("⚠️ No hay datos en la base de datos")
+    st.error("❌ No hay datos disponibles. Ejecuta el extractor primero.")
     st.stop()
 
-# Convertir fecha
+df.columns = [c.lower() for c in df.columns]
 df["fecha_extraccion"] = pd.to_datetime(df["fecha_extraccion"])
 
-# ------------------- Sidebar -------------------
+# ── Sidebar ─────────────────────────────────────────────────────
 st.sidebar.markdown("### 🔧 Filtros")
 
-ciudades = df["ciudad"].unique().tolist()
+ciudades = sorted(df["ciudad"].unique().tolist())
+ciudades_sel = st.sidebar.multiselect("🏙️ Ciudades", ciudades, default=ciudades)
 
-ciudades_seleccionadas = st.sidebar.multiselect(
-    "🏙️ Ciudades",
-    options=ciudades,
-    default=ciudades
-)
+fecha_min = df["fecha_extraccion"].min().date()
+fecha_max = df["fecha_extraccion"].max().date()
 
-fecha_inicio = st.sidebar.date_input(
-    "📅 Desde",
-    value=df["fecha_extraccion"].min().date()
-)
+fecha_inicio = st.sidebar.date_input("📅 Desde", value=fecha_min)
+fecha_fin    = st.sidebar.date_input("📅 Hasta", value=fecha_max)
 
-fecha_fin = st.sidebar.date_input(
-    "📅 Hasta",
-    value=df["fecha_extraccion"].max().date()
-)
+temp_min = st.sidebar.slider("🌡️ Temp Mín (°C)", -50, 50, int(df["temperatura"].min()) - 1)
+temp_max = st.sidebar.slider("🌡️ Temp Máx (°C)", -50, 50, int(df["temperatura"].max()) + 1)
 
-temp_min = st.sidebar.slider("🌡️ Temp Mín", -50, 50, -10)
-temp_max = st.sidebar.slider("🌡️ Temp Máx", -50, 50, 40)
-
-# ------------------- Aplicar filtros -------------------
-df_filtrado = df[
-    (df["ciudad"].isin(ciudades_seleccionadas)) &
+# ── Filtros ──────────────────────────────────────────────────────
+df_f = df[
+    (df["ciudad"].isin(ciudades_sel)) &
     (df["fecha_extraccion"].dt.date >= fecha_inicio) &
     (df["fecha_extraccion"].dt.date <= fecha_fin) &
     (df["temperatura"] >= temp_min) &
     (df["temperatura"] <= temp_max)
 ]
 
-if df_filtrado.empty:
-    st.warning("⚠️ No hay datos con los filtros seleccionados")
+if df_f.empty:
+    st.warning("⚠️ No hay datos con los filtros seleccionados.")
     st.stop()
 
-# ------------------- KPIs -------------------
+# ── KPIs ─────────────────────────────────────────────────────────
 st.markdown("### 📊 Indicadores Clave")
-
-col1, col2, col3, col4, col5 = st.columns(5)
-
-with col1:
-    st.metric("🌡️ Temp Max", f"{df_filtrado['temperatura'].max():.1f}°C")
-
-with col2:
-    st.metric("🌡️ Temp Min", f"{df_filtrado['temperatura'].min():.1f}°C")
-
-with col3:
-    st.metric("🌡️ Temp Prom", f"{df_filtrado['temperatura'].mean():.1f}°C")
-
-with col4:
-    st.metric("💧 Humedad Prom", f"{df_filtrado['humedad'].mean():.1f}%")
-
-with col5:
-    st.metric("💨 Viento Max", f"{df_filtrado['velocidad_viento'].max():.1f} km/h")
+c1, c2, c3, c4, c5 = st.columns(5)
+c1.metric("🌡️ Temp Máx",    f"{df_f['temperatura'].max():.1f}°C")
+c2.metric("🌡️ Temp Mín",    f"{df_f['temperatura'].min():.1f}°C")
+c3.metric("🌡️ Temp Prom",   f"{df_f['temperatura'].mean():.1f}°C")
+c4.metric("💧 Humedad Prom", f"{df_f['humedad'].mean():.1f}%")
+c5.metric("💨 Viento Máx",  f"{df_f['velocidad_viento'].max():.1f} km/h")
 
 st.markdown("---")
 
-# ------------------- Gráficas -------------------
+# ── Gráficas ──────────────────────────────────────────────────────
 col1, col2 = st.columns(2)
 
 with col1:
-    fig_temp = px.box(
-        df_filtrado,
-        x="ciudad",
-        y="temperatura",
-        color="ciudad",
-        title="Distribución de Temperatura por Ciudad"
-    )
-    st.plotly_chart(fig_temp, use_container_width=True)
+    fig = px.box(df_f, x="ciudad", y="temperatura", color="ciudad",
+                 title="Distribución de Temperatura por Ciudad")
+    st.plotly_chart(fig, use_container_width=True)
 
 with col2:
-    humedad_ciudad = df_filtrado.groupby("ciudad")["humedad"].mean().reset_index()
-    fig_hum = px.bar(
-        humedad_ciudad,
-        x="ciudad",
-        y="humedad",
-        color="humedad",
-        color_continuous_scale="Blues",
-        title="Humedad Promedio por Ciudad"
-    )
-    st.plotly_chart(fig_hum, use_container_width=True)
+    hum = df_f.groupby("ciudad")["humedad"].mean().reset_index()
+    fig = px.bar(hum, x="ciudad", y="humedad", color="humedad",
+                 color_continuous_scale="Blues",
+                 title="Humedad Promedio por Ciudad")
+    st.plotly_chart(fig, use_container_width=True)
 
 st.markdown("---")
 
-# Evolución temporal
-temp_tiempo = df_filtrado.groupby(
-    ["fecha_extraccion", "ciudad"]
-)["temperatura"].mean().reset_index()
-
-fig_line = px.line(
-    temp_tiempo,
-    x="fecha_extraccion",
-    y="temperatura",
-    color="ciudad",
-    title="Evolución de Temperatura en el Tiempo",
-    markers=True
-)
-
-st.plotly_chart(fig_line, use_container_width=True)
+temp_t = df_f.groupby(["fecha_extraccion", "ciudad"])["temperatura"].mean().reset_index()
+fig = px.line(temp_t, x="fecha_extraccion", y="temperatura", color="ciudad",
+              title="Evolución de Temperatura en el Tiempo", markers=True)
+st.plotly_chart(fig, use_container_width=True)
 
 st.markdown("---")
 
-# ------------------- Tabla -------------------
+# ── Tabla + descarga ──────────────────────────────────────────────
 st.markdown("### 📋 Datos Detallados")
-
-st.dataframe(df_filtrado, use_container_width=True)
-
-# Descargar CSV
-csv = df_filtrado.to_csv(index=False)
+st.dataframe(df_f, use_container_width=True)
 
 st.download_button(
     label="⬇️ Descargar CSV",
-    data=csv,
+    data=df_f.to_csv(index=False),
     file_name=f"clima_{datetime.now().strftime('%Y%m%d_%H%M%S')}.csv",
     mime="text/csv"
 )
