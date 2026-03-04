@@ -5,6 +5,10 @@ Dashboard interactivo con análisis de indicadores económicos del World Bank, m
 ## 👥 Grupo 8 – Zambrano & Chala
 
 ---
+## 🚀 Demo
+
+[![Streamlit App](https://static.streamlit.io/badges/streamlit_badge_black_white.svg)](https://https://grupo8zambranochala-sccr9ysvtqykwtktandvgj.streamlit.app//)
+
 
 ## 🔍 ¿Qué es este proyecto?
 
@@ -55,6 +59,12 @@ streamlit run dashboard_interactive.py
 ```
 
 ---
+## ☁️ Despliegue en Streamlit Cloud
+
+1. Sube el proyecto a GitHub
+2. En [Streamlit Cloud](https://streamlit.io/cloud) → **New app**
+3. Selecciona el archivo principal: `04-Aplicar-Streamlit-Proyecto/dashboard_interactive.py`
+
 
 ## 🐳 Con Docker
 ```bash
