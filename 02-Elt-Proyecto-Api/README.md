@@ -2,7 +2,7 @@
 
 Pipeline ETL completo que extrae indicadores económicos de la **World Bank API** para Colombia y países comparados.
 
-## 👥 Grupo 8 – Zambrano & Chala
+## 👥 Grupo 8 – Ximena del pilar zambrano chala
 
 ---
 
