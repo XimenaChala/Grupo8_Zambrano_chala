@@ -1,114 +1,40 @@
-# 📦 02 - ETL Proyecto API – World Bank PIB
+# 📊 04 - Aplicar Streamlit Proyecto – World Bank Dashboard
 
-Pipeline ETL completo que extrae indicadores económicos de la **World Bank API** para Colombia y países comparados.
+Dashboard interactivo con análisis de indicadores económicos del World Bank, modelos de Machine Learning y containerización con Docker.
 
-## 👥 Grupo 8 – Ximena del pilar zambrano chala
-
----
-
-## 🔄 ¿Qué es ETL?
-
-| Letra | Significado | Script | ¿Qué hace? |
-|-------|-------------|--------|------------|
-| **E** | Extract | `extractor.py` | Llama a la API del World Bank y descarga los datos |
-| **T** | Transform | `transformador.py` | Limpia, organiza y enriquece los datos |
-| **L** | Load | `extractor.py` | Guarda los datos en CSV, JSON y PostgreSQL |
+## 👥 Grupo 8 – Zambrano & Chala
 
 ---
 
-## 🌐 API Utilizada
+## 🔍 ¿Qué es este proyecto?
 
-**World Bank API** — `https://api.worldbank.org/v2/`
-
-- ✅ Gratuita y sin API Key
-- ✅ Datos económicos de todos los países del mundo desde los años 60
-- ✅ Documentación: https://data.worldbank.org/developers
+Una aplicación web interactiva construida con **Streamlit** que consume los datos extraídos por el ETL (proyecto 02) y los presenta en visualizaciones dinámicas. Permite comparar el desempeño económico de Colombia frente a otros países de América Latina entre 2000 y 2023.
 
 ---
 
-## 📊 Indicadores Extraídos
-
-Para **Colombia, USA, Brasil, México, Argentina, Chile y Perú** entre **2000 y 2023**:
-
-| Código World Bank | Descripción |
-|-------------------|-------------|
-| NY.GDP.MKTP.CD | PIB total en USD |
-| NY.GDP.MKTP.KD.ZG | Crecimiento del PIB (%) |
-| NY.GDP.PCAP.CD | PIB per cápita USD |
-| NY.GDP.PCAP.KD.ZG | Crecimiento PIB per cápita (%) |
-| FP.CPI.TOTL.ZG | Inflación (%) |
-| SL.UEM.TOTL.ZS | Desempleo (%) |
-| NE.EXP.GNFS.ZS | Exportaciones % del PIB |
-| NE.IMP.GNFS.ZS | Importaciones % del PIB |
-
-**Resultado: 168 registros limpios extraídos exitosamente**
-
----
-
-## 🌍 Países Analizados
-
-| Código | País | Rol |
-|--------|------|-----|
-| CO | Colombia | **País foco** |
-| US | United States | Referencia |
-| BR | Brazil | América Latina |
-| MX | Mexico | América Latina |
-| AR | Argentina | América Latina |
-| CL | Chile | América Latina |
-| PE | Peru | América Latina |
-
----
-
-## 📁 Estructura del Proyecto
+## 📁 Estructura
 ```
-02-Elt-Proyecto-Api/
-├── .gitignore
-├── .env                  ← NO commitear (credenciales BD)
-├── requirements.txt
-├── README.md
-├── venv/                 ← Entorno virtual (NO commitear)
-├── data/
-│   ├── worldbank_pib.csv
-│   ├── worldbank_pib_raw.json
-│   └── worldbank_graficas.png
+04-Aplicar-Streamlit-Proyecto/
+├── dashboard_interactive.py  ⭐ App principal (4 secciones)
+├── dashboard_app.py          Dashboard básico
+├── dashboard_advanced.py     Dashboard avanzado
 ├── scripts/
-│   ├── extractor.py      ← EXTRACT + LOAD
-│   ├── transformador.py  ← TRANSFORM
-│   └── visualizador.py   ← Gráficas con matplotlib
-└── logs/
-    └── etl.log
+│   ├── database.py           Conexión PostgreSQL / fallback CSV
+│   ├── models.py             Tablas SQLAlchemy ORM
+│   ├── extractor.py          Extrae API → CSV
+│   ├── extractor_db.py       Extrae API → PostgreSQL
+│   ├── consultas.py          Queries reutilizables
+│   └── test_db.py            Tests de conexión
+├── notebooks/
+│   └── analisis_ml.ipynb     3 modelos de Machine Learning
+├── data/                     CSV generado automáticamente
+├── logs/
+│   └── etl.log               Registro de ejecución
+├── docker-compose.yml        PostgreSQL + Streamlit en Docker
+├── .env.example
+├── requirements.txt
+└── README.md
 ```
-
----
-
-## 📄 Descripción de Archivos
-
-**`scripts/extractor.py`** — Corazón del proyecto. Contiene 3 clases:
-- `WorldBankExtractor` — llama la API y descarga los datos
-- `WorldBankTransformer` — limpia y enriquece el DataFrame
-- `WorldBankLoader` — guarda en CSV, JSON y PostgreSQL
-
-**`scripts/transformador.py`** — Limpia nulos, redondea decimales, clasifica países por región, marca Colombia como país foco y calcula la balanza comercial.
-
-**`scripts/visualizador.py`** — Genera 4 gráficas con matplotlib:
-- Evolución del PIB total
-- Crecimiento del PIB (%)
-- Ranking PIB per cápita
-- Inflación vs Desempleo Colombia
-
-**`scripts/crear_bd.sql`** — Diseño de la base de datos PostgreSQL con tablas, índices y vistas. Se usará en la fase 04.
-
-**`requirements.txt`** — Librerías necesarias: requests, pandas, matplotlib, sqlalchemy, psycopg2.
-
-**`.env`** — Credenciales de PostgreSQL. ⚠️ Nunca se sube a GitHub.
-
----
-
-## 🗄️ Base de Datos PostgreSQL (Fase 04)
-
-Diseñada con la tabla `indicadores_pib` y dos vistas:
-- `v_colombia_vs_latam` — compara Colombia con el promedio latinoamericano
-- `v_ranking_pib_pc` — ranking de PIB per cápita por año
 
 ---
 
@@ -122,24 +48,72 @@ pip install -r requirements.txt
 
 # 3. Configurar variables de entorno
 cp .env.example .env
-# Edita .env con tu contraseña de PostgreSQL
 
-# 4. Ejecutar el ETL
-python scripts/extractor.py
-
-# 5. Generar gráficas
-python scripts/visualizador.py
+# 4. Ejecutar dashboard principal
+streamlit run dashboard_interactive.py
+# Abre: http://localhost:8501
 ```
 
 ---
 
-## ✅ Resultados Obtenidos
+## 🐳 Con Docker
+```bash
+docker-compose up --build
+# Dashboard en: http://localhost:8501
+```
 
-- 📊 **168 registros** extraídos exitosamente
-- 🌍 **7 países** analizados
-- 📅 **Período:** 2000 – 2023
-- 📁 Datos guardados en `data/worldbank_pib.csv` y `data/worldbank_pib_raw.json`
-- 📈 Gráficas guardadas en `data/worldbank_graficas.png`
+---
+
+## 📊 Secciones del Dashboard
+
+| Sección | Descripción |
+|---------|-------------|
+| 📊 Resumen General | KPIs Colombia, evolución PIB total y crecimiento por país |
+| 🇨🇴 Colombia Detalle | PIB, inflación vs desempleo, tabla descargable en CSV |
+| 🌎 Comparativa Regional | Colombia vs promedio LATAM, ranking PIB per cápita |
+| ⚖️ Balanza Comercial | Exportaciones, importaciones y balance comercial |
+
+---
+
+## 🗄️ Fuente de Datos
+
+El dashboard carga datos de dos fuentes en orden de prioridad:
+
+1. **PostgreSQL** — si hay conexión disponible lee directo de la BD
+2. **CSV fallback** — si no hay BD usa `data/worldbank_pib.csv` generado por el ETL
+
+---
+
+## 🤖 Machine Learning (notebooks/analisis_ml.ipynb)
+
+| # | Modelo | Objetivo | Métricas |
+|---|--------|----------|----------|
+| 1 | Regresión Lineal | Predecir PIB per cápita Colombia 2024-2027 | R², MAE |
+| 2 | Random Forest | Identificar variables que más influyen en el crecimiento PIB | R², RMSE |
+| 3 | K-Means Clustering | Agrupar países por similitud económica | k=3 clusters |
+
+---
+
+## 📦 Scripts
+
+| Script | Descripción |
+|--------|-------------|
+| `database.py` | Conecta a PostgreSQL, si falla usa CSV automáticamente |
+| `models.py` | Define las tablas con SQLAlchemy ORM |
+| `extractor.py` | Extrae datos del World Bank API y guarda en CSV |
+| `extractor_db.py` | Extrae datos y carga directo a PostgreSQL |
+| `consultas.py` | Funciones reutilizables: rankings, comparativas, balanza |
+| `test_db.py` | Verifica conexión y calidad de los datos |
+
+---
+
+## ✅ Resultados
+
+- ✅ Dashboard con **4 secciones** interactivas
+- ✅ **168 registros** de 7 países (2000-2023)
+- ✅ Conexión dual: PostgreSQL + CSV fallback
+- ✅ **3 modelos ML** implementados en Jupyter
+- ✅ Containerizado con Docker Compose
 
 ---
 
@@ -147,7 +121,14 @@ python scripts/visualizador.py
 
 | Fase | Carpeta | Descripción | Estado |
 |------|---------|-------------|--------|
-| 02 | `02-Elt-Proyecto-Api` | ETL completo con World Bank API | ✅ Terminado |
-| 03 | `Aplicar-Streamlit-Proyecto` | Dashboard interactivo con Plotly | 🔜 Siguiente |
-| 04 | Por definir | PostgreSQL + Docker Compose | 🔜 Pendiente |
-| 05 | Por definir | Machine Learning con Jupyter | 🔜 Pendiente |
+| 02 | `02-Elt-Proyecto-Api` | ETL completo World Bank API | ✅ Terminado |
+| 04 | `04-Aplicar-Streamlit-Proyecto` | Dashboard + ML + Docker | ✅ Terminado |
+
+---
+
+## 🔗 Fuente de Datos
+
+- **API:** https://api.worldbank.org/v2/
+- **Sin API Key** — completamente gratuita
+- **Período:** 2000 – 2023
+- **Países:** CO, US, BR, MX, AR, CL, PE
