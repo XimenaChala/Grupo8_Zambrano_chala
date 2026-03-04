@@ -7,7 +7,7 @@ Dashboard interactivo con análisis de indicadores económicos del World Bank, m
 ---
 ## 🚀 Demo
 
-[![Streamlit App](https://static.streamlit.io/badges/streamlit_badge_black_white.svg)](https://https://grupo8zambranochala-sccr9ysvtqykwtktandvgj.streamlit.app//)
+[![Streamlit App](https://static.streamlit.io/badges/streamlit_badge_black_white.svg)](https://grupo8zambranochala-sccr9ysvtqykwtktandvgj.streamlit.app/)
 
 
 ## 🔍 ¿Qué es este proyecto?
