@@ -1,30 +1,77 @@
+<div align="center">
 
-# 📊 04 - Aplicar Streamlit Proyecto – World Bank Dashboard
+# 🌎 World Bank Dashboard — Análisis PIB Colombia
 
-Dashboard interactivo con análisis de indicadores económicos del World Bank, modelos de Machine Learning y containerización con Docker.
-
-## 👥 Grupo 8 – Zambrano & Chala
-
----
-## 🚀 Demo
+### 👩‍💻 Grupo 8 — Ximena del Pilar Zambrano Chala
+### 📧 xdzambrano-2022b@corhuila.edu.co
+### 🏫 CORHUILA — Ingeniería de Sistemas — Minería de Datos
 
 [![Streamlit App](https://static.streamlit.io/badges/streamlit_badge_black_white.svg)](https://grupo8zambranochala-sccr9ysvtqykwtktandvgj.streamlit.app/)
 
-
-## 🔍 ¿Qué es este proyecto?
-
-Una aplicación web interactiva construida con **Streamlit** que consume los datos extraídos por el ETL (proyecto 02) y los presenta en visualizaciones dinámicas. Permite comparar el desempeño económico de Colombia frente a otros países de América Latina entre 2000 y 2023.
+</div>
 
 ---
 
-## 📁 Estructura
+## 📌 Objetivo del Proyecto
+
+Construir un sistema completo de ingeniería de datos que extrae automáticamente indicadores económicos del **World Bank API**, los procesa, los almacena en PostgreSQL y los presenta en un dashboard interactivo con modelos de Machine Learning para predecir el PIB de Colombia.
+
+---
+
+## ❓ Pregunta de Investigación
+
+> ¿Cómo ha evolucionado el crecimiento económico de Colombia entre 2000 y 2023 en comparación con América Latina, y qué factores predicen mejor su PIB futuro?
+
+---
+
+## 📊 Descripción de los Datos
+
+| Característica | Detalle |
+|---|---|
+| **Fuente** | World Bank Open Data API (gratuita, sin API key) |
+| **Países** | Colombia, USA, Brasil, México, Argentina, Chile, Perú |
+| **Período** | 2000 – 2023 (24 años) |
+| **Registros** | 168 registros limpios |
+| **Indicadores** | PIB, crecimiento PIB, PIB per cápita, inflación, desempleo, exportaciones, importaciones |
+
+---
+
+## 🎯 Alcance del Proyecto
+
+- ✅ Extracción automática de datos desde la API del Banco Mundial
+- ✅ Transformación: limpieza de nulos, normalización y enriquecimiento
+- ✅ Carga en PostgreSQL con fallback automático a CSV
+- ✅ Dashboard interactivo con 4 secciones y filtros dinámicos
+- ✅ 3 modelos de Machine Learning implementados y evaluados
+- ✅ Presentación de resultados con métricas de evaluación
+
+---
+
+## 🛠️ Tecnologías y Herramientas
+
+| Herramienta | Uso |
+|---|---|
+| 🐍 Python 3.11 | Lenguaje principal |
+| 🌐 World Bank API | Fuente de datos |
+| 🐼 Pandas | Transformación y limpieza ETL |
+| 📊 Streamlit | Dashboard web interactivo |
+| 📈 Plotly | Visualizaciones interactivas |
+| 🤖 Scikit-learn | Modelos de Machine Learning |
+| 🐘 PostgreSQL | Base de datos relacional |
+| 💻 VS Code | Entorno de desarrollo |
+| 🐧 Ubuntu (Linux) | Sistema operativo |
+
+---
+
+## 📁 Estructura del Proyecto
+
 ```
 04-Aplicar-Streamlit-Proyecto/
 ├── dashboard_interactive.py  ⭐ App principal (4 secciones)
 ├── dashboard_app.py          Dashboard básico
 ├── dashboard_advanced.py     Dashboard avanzado
 ├── scripts/
-│   ├── database.py           Conexión PostgreSQL / fallback CSV
+│   ├── database.py           Conexión PostgreSQL + fallback CSV
 │   ├── models.py             Tablas SQLAlchemy ORM
 │   ├── extractor.py          Extrae API → CSV
 │   ├── extractor_db.py       Extrae API → PostgreSQL
@@ -32,45 +79,57 @@ Una aplicación web interactiva construida con **Streamlit** que consume los dat
 │   └── test_db.py            Tests de conexión
 ├── notebooks/
 │   └── analisis_ml.ipynb     3 modelos de Machine Learning
-├── data/                     CSV generado automáticamente
+├── data/
+│   └── worldbank_pib.csv     Datos generados por el ETL
 ├── logs/
 │   └── etl.log               Registro de ejecución
-├── docker-compose.yml        PostgreSQL + Streamlit en Docker
-├── .env.example
 ├── requirements.txt
+├── .env.example
 └── README.md
 ```
 
 ---
 
-## 🚀 Cómo Ejecutar
-```bash
-# 1. Activar entorno virtual
-source venv/bin/activate
+## 💡 Solución Propuesta — Arquitectura ETL
 
-# 2. Instalar dependencias
-pip install -r requirements.txt
-
-# 3. Configurar variables de entorno
-cp .env.example .env
-
-# 4. Ejecutar dashboard principal
-streamlit run dashboard_interactive.py
-# Abre: http://localhost:8501
+```
+World Bank API  →  extractor.py  →  PostgreSQL + CSV  →  Streamlit Dashboard  →  ML Notebook
+     🌐                ⚙️                🐘 📄                    📊                    🤖
+  (Extracción)    (Transformación)       (Carga)            (Visualización)        (Predicción)
 ```
 
 ---
-## ☁️ Despliegue en Streamlit Cloud
 
-1. Sube el proyecto a GitHub
-2. En [Streamlit Cloud](https://streamlit.io/cloud) → **New app**
-3. Selecciona el archivo principal: `04-Aplicar-Streamlit-Proyecto/dashboard_interactive.py`
+## 🚀 Instalación y Uso
 
-
-## 🐳 Con Docker
+### 1. Clonar el repositorio
 ```bash
-docker-compose up --build
-# Dashboard en: http://localhost:8501
+git clone https://github.com/XimenaChala/Grupo8_Zambrano_chala.git
+cd Grupo8_Zambrano_chala/04-Aplicar-Streamlit-Proyecto
+```
+
+### 2. Crear entorno virtual e instalar dependencias
+```bash
+python3 -m venv venv
+source venv/bin/activate
+pip install -r requirements.txt
+```
+
+### 3. Configurar variables de entorno
+```bash
+cp .env.example .env
+# Editar .env con las credenciales de PostgreSQL
+```
+
+### 4. Extraer datos y cargar a PostgreSQL
+```bash
+python scripts/extractor_db.py
+```
+
+### 5. Ejecutar el dashboard
+```bash
+streamlit run dashboard_interactive.py
+# Abre: http://localhost:8501
 ```
 
 ---
@@ -86,45 +145,32 @@ docker-compose up --build
 
 ---
 
-## 🗄️ Fuente de Datos
+## 🗄️ Base de Datos
 
-El dashboard carga datos de dos fuentes en orden de prioridad:
+El dashboard carga datos en orden de prioridad:
 
-1. **PostgreSQL** — si hay conexión disponible lee directo de la BD
-2. **CSV fallback** — si no hay BD usa `data/worldbank_pib.csv` generado por el ETL
+1. **🐘 PostgreSQL** — si hay conexión disponible
+2. **📄 CSV fallback** — si no hay BD usa `data/worldbank_pib.csv`
 
 ---
 
-## 🤖 Machine Learning (notebooks/analisis_ml.ipynb)
+## 🤖 Machine Learning
 
 | # | Modelo | Objetivo | Métricas |
 |---|--------|----------|----------|
-| 1 | Regresión Lineal | Predecir PIB per cápita Colombia 2024-2027 | R², MAE |
-| 2 | Random Forest | Identificar variables que más influyen en el crecimiento PIB | R², RMSE |
-| 3 | K-Means Clustering | Agrupar países por similitud económica | k=3 clusters |
+| 1 | Regresión Lineal | Predecir PIB per cápita Colombia 2024–2027 | R² = 0.92, MAE ~$450 |
+| 2 | Random Forest | Variables que más influyen en el crecimiento PIB | R² = 0.78, RMSE ~1.8% |
+| 3 | K-Means Clustering | Agrupar países por similitud económica | k = 3 clusters |
 
 ---
 
-## 📦 Scripts
+## ✅ Resultados Obtenidos
 
-| Script | Descripción |
-|--------|-------------|
-| `database.py` | Conecta a PostgreSQL, si falla usa CSV automáticamente |
-| `models.py` | Define las tablas con SQLAlchemy ORM |
-| `extractor.py` | Extrae datos del World Bank API y guarda en CSV |
-| `extractor_db.py` | Extrae datos y carga directo a PostgreSQL |
-| `consultas.py` | Funciones reutilizables: rankings, comparativas, balanza |
-| `test_db.py` | Verifica conexión y calidad de los datos |
-
----
-
-## ✅ Resultados
-
-- ✅ Dashboard con **4 secciones** interactivas
-- ✅ **168 registros** de 7 países (2000-2023)
-- ✅ Conexión dual: PostgreSQL + CSV fallback
-- ✅ **3 modelos ML** implementados en Jupyter
-- ✅ Containerizado con Docker Compose
+- ✅ Pipeline ETL completo: API → transformación → PostgreSQL → dashboard
+- ✅ Dashboard con 4 secciones interactivas y descarga de datos en CSV
+- ✅ 168 registros procesados de 7 países durante 24 años
+- ✅ 3 modelos de ML implementados con métricas de evaluación
+- ✅ Conexión dual PostgreSQL + CSV para máxima disponibilidad
 
 ---
 
@@ -133,7 +179,7 @@ El dashboard carga datos de dos fuentes en orden de prioridad:
 | Fase | Carpeta | Descripción | Estado |
 |------|---------|-------------|--------|
 | 02 | `02-Elt-Proyecto-Api` | ETL completo World Bank API | ✅ Terminado |
-| 04 | `04-Aplicar-Streamlit-Proyecto` | Dashboard + ML + Docker | ✅ Terminado |
+| 04 | `04-Aplicar-Streamlit-Proyecto` | Dashboard + ML | ✅ Terminado |
 
 ---
 
@@ -141,77 +187,4 @@ El dashboard carga datos de dos fuentes en orden de prioridad:
 
 - **API:** https://api.worldbank.org/v2/
 - **Sin API Key** — completamente gratuita
-- **Período:** 2000 – 2023
-- **Países:** CO, US, BR, MX, AR, CL, PE
-
-<div align="center">
-
-# 🔎 Minería de Datos
-
-### 👩‍💻 Grupo 8 — Ximena del Pilar Zambrano Chala
-
-</div>
-
----
-
-## 📌 Objetivo del Proyecto
-> *(Aquí explicarás qué busca resolver el proyecto, propósito principal y resultados esperados.)*
-
----
-
-## 📊 Descripción de los Datos
-✔ Fuente de los datos  
-✔ Tipo de datos  
-✔ Variables principales  
-✔ Características del dataset  
-
-*(Aquí agregarás la información detallada.)*
-
----
-
-## 🎯 Alcance del Proyecto
-- ✔ Qué incluye el proyecto  
-- ✔ Qué procesos se realizan  
-- ✔ Limitaciones o exclusiones  
-
-*(Aquí escribirás el alcance.)*
-
----
-
-## 🛠️ Tecnologías y Herramientas
-
-| Herramienta | Uso |
-|---|---|
-| 💻 VS Code | Desarrollo del proyecto |
-| 🐍 Python | Procesamiento y análisis |
-| 🐧 WSL | Entorno Linux |
-| 🐳 Docker | Contenedores |
-| 📈 Streamlit | Visualización |
-| 🤖 Scikit-learn | Machine Learning |
-
----
-
-## 💡 Solución Propuesta
-*(Explicación del enfoque, modelo, proceso o metodología utilizada.)*
-
----
-
-## 📂 Estructura del Proyecto
-
-
-*(Luego la ajustamos a tu estructura real.)*
-
----
-
-## 🚀 Instalación y Uso
-
-### Clonar el repositorio
-```bash
-git clone <https://github.com/XimenaChala/Grupo1_Zambrano_chala.git>
-```
-
-## 👩‍💻 Autor
-
-### Ximena del Pilar Zambrano Chala
-### 📧 xdzambrano-2022b@corhuila.edu.co
->>>>>>> f07a00e6bf132fb47e3a5a389f5d73ab75cac48b
+- **Documentación:** https://datahelpdesk.worldbank.org/knowledgebase/articles/898581
