@@ -1,4 +1,4 @@
-<<<<<<< HEAD
+
 # 📊 04 - Aplicar Streamlit Proyecto – World Bank Dashboard
 
 Dashboard interactivo con análisis de indicadores económicos del World Bank, modelos de Machine Learning y containerización con Docker.
@@ -143,7 +143,7 @@ El dashboard carga datos de dos fuentes en orden de prioridad:
 - **Sin API Key** — completamente gratuita
 - **Período:** 2000 – 2023
 - **Países:** CO, US, BR, MX, AR, CL, PE
-=======
+
 <div align="center">
 
 # 🔎 Minería de Datos
