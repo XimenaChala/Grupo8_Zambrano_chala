@@ -48,3 +48,4 @@ def test_consulta_colombia():
 def test_vistas_postgres():
     print("\n👁️  Test 4: Vistas PostgreSQL")
     if not test_conexion():
+        pass
