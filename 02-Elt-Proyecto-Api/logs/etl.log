@@ -1,0 +1,69 @@
+2026-03-04 15:34:48,563 - INFO - Extractor iniciado | Países: ['CO', 'US', 'BR', 'MX', 'AR', 'CL', 'PE'] | Años: 2000-2023
+2026-03-04 15:34:48,563 - INFO - ── Procesando país: CO
+2026-03-04 15:34:49,466 - ERROR - Error HTTP para CO/NY.GDP.MKTP.CD: 400 Client Error: Bad Request for url: https://api.worldbank.org/v2/country/CO/indicator/NY.GDP.MKTP.CD?format=json&date=2000:2023&per_page=100
+2026-03-04 15:34:50,084 - INFO -   ✅ crecimiento_pib_pct: 24 registros
+2026-03-04 15:34:50,703 - INFO -   ✅ pib_per_capita_usd: 24 registros
+2026-03-04 15:34:51,725 - INFO -   ✅ crecimiento_pib_pc_pct: 24 registros
+2026-03-04 15:34:52,135 - INFO -   ✅ inflacion_pct: 24 registros
+2026-03-04 15:34:52,922 - INFO -   ✅ desempleo_pct: 24 registros
+2026-03-04 15:34:53,568 - INFO -   ✅ exportaciones_pct_pib: 24 registros
+2026-03-04 15:34:54,341 - INFO -   ✅ importaciones_pct_pib: 24 registros
+2026-03-04 15:34:54,341 - INFO - ── Procesando país: US
+2026-03-04 15:34:54,691 - INFO -   ✅ pib_usd: 24 registros
+2026-03-04 15:34:55,149 - INFO -   ✅ crecimiento_pib_pct: 24 registros
+2026-03-04 15:34:55,821 - INFO -   ✅ pib_per_capita_usd: 24 registros
+2026-03-04 15:34:56,455 - INFO -   ✅ crecimiento_pib_pc_pct: 24 registros
+2026-03-04 15:34:56,743 - INFO -   ✅ inflacion_pct: 24 registros
+2026-03-04 15:34:57,049 - INFO -   ✅ desempleo_pct: 24 registros
+2026-03-04 15:34:57,355 - INFO -   ✅ exportaciones_pct_pib: 24 registros
+2026-03-04 15:34:57,662 - INFO -   ✅ importaciones_pct_pib: 24 registros
+2026-03-04 15:34:57,662 - INFO - ── Procesando país: BR
+2026-03-04 15:34:57,968 - INFO -   ✅ pib_usd: 24 registros
+2026-03-04 15:34:58,251 - INFO -   ✅ crecimiento_pib_pct: 24 registros
+2026-03-04 15:34:58,893 - INFO -   ✅ pib_per_capita_usd: 24 registros
+2026-03-04 15:34:59,507 - INFO -   ✅ crecimiento_pib_pc_pct: 24 registros
+2026-03-04 15:34:59,815 - INFO -   ✅ inflacion_pct: 24 registros
+2026-03-04 15:35:00,119 - INFO -   ✅ desempleo_pct: 24 registros
+2026-03-04 15:35:00,526 - INFO -   ✅ exportaciones_pct_pib: 24 registros
+2026-03-04 15:35:00,839 - INFO -   ✅ importaciones_pct_pib: 24 registros
+2026-03-04 15:35:00,839 - INFO - ── Procesando país: MX
+2026-03-04 15:35:01,654 - INFO -   ✅ pib_usd: 24 registros
+2026-03-04 15:35:02,374 - INFO -   ✅ crecimiento_pib_pct: 24 registros
+2026-03-04 15:35:03,091 - INFO -   ✅ pib_per_capita_usd: 24 registros
+2026-03-04 15:35:03,601 - INFO -   ✅ crecimiento_pib_pc_pct: 24 registros
+2026-03-04 15:35:04,226 - INFO -   ✅ inflacion_pct: 24 registros
+2026-03-04 15:35:04,929 - ERROR - Error HTTP para MX/SL.UEM.TOTL.ZS: 400 Client Error: Bad Request for url: https://api.worldbank.org/v2/country/MX/indicator/SL.UEM.TOTL.ZS?format=json&date=2000:2023&per_page=100
+2026-03-04 15:35:05,549 - INFO -   ✅ exportaciones_pct_pib: 24 registros
+2026-03-04 15:35:06,163 - INFO -   ✅ importaciones_pct_pib: 24 registros
+2026-03-04 15:35:06,163 - INFO - ── Procesando país: AR
+2026-03-04 15:35:06,980 - INFO -   ✅ pib_usd: 24 registros
+2026-03-04 15:35:07,802 - INFO -   ✅ crecimiento_pib_pct: 24 registros
+2026-03-04 15:35:08,314 - INFO -   ✅ pib_per_capita_usd: 24 registros
+2026-03-04 15:35:08,930 - INFO -   ✅ crecimiento_pib_pc_pct: 24 registros
+2026-03-04 15:35:09,543 - INFO -   ✅ inflacion_pct: 6 registros
+2026-03-04 15:35:10,875 - INFO -   ✅ desempleo_pct: 24 registros
+2026-03-04 15:35:11,592 - INFO -   ✅ exportaciones_pct_pib: 24 registros
+2026-03-04 15:35:12,098 - ERROR - Error HTTP para AR/NE.IMP.GNFS.ZS: 400 Client Error: Bad Request for url: https://api.worldbank.org/v2/country/AR/indicator/NE.IMP.GNFS.ZS?format=json&date=2000:2023&per_page=100
+2026-03-04 15:35:12,100 - INFO - ── Procesando país: CL
+2026-03-04 15:35:12,816 - INFO -   ✅ pib_usd: 24 registros
+2026-03-04 15:35:13,428 - ERROR - Error HTTP para CL/NY.GDP.MKTP.KD.ZG: 400 Client Error: Bad Request for url: https://api.worldbank.org/v2/country/CL/indicator/NY.GDP.MKTP.KD.ZG?format=json&date=2000:2023&per_page=100
+2026-03-04 15:35:14,046 - INFO -   ✅ pib_per_capita_usd: 24 registros
+2026-03-04 15:35:14,662 - INFO -   ✅ crecimiento_pib_pc_pct: 24 registros
+2026-03-04 15:35:14,970 - INFO -   ✅ inflacion_pct: 24 registros
+2026-03-04 15:35:15,587 - INFO -   ✅ desempleo_pct: 24 registros
+2026-03-04 15:35:16,200 - INFO -   ✅ exportaciones_pct_pib: 24 registros
+2026-03-04 15:35:16,711 - INFO -   ✅ importaciones_pct_pib: 24 registros
+2026-03-04 15:35:16,712 - INFO - ── Procesando país: PE
+2026-03-04 15:35:17,321 - INFO -   ✅ pib_usd: 24 registros
+2026-03-04 15:35:18,144 - INFO -   ✅ crecimiento_pib_pct: 24 registros
+2026-03-04 15:35:18,861 - INFO -   ✅ pib_per_capita_usd: 24 registros
+2026-03-04 15:35:19,476 - INFO -   ✅ crecimiento_pib_pc_pct: 24 registros
+2026-03-04 15:35:19,783 - INFO -   ✅ inflacion_pct: 24 registros
+2026-03-04 15:35:20,469 - INFO -   ✅ desempleo_pct: 24 registros
+2026-03-04 15:35:21,108 - ERROR - Error HTTP para PE/NE.EXP.GNFS.ZS: 400 Client Error: Bad Request for url: https://api.worldbank.org/v2/country/PE/indicator/NE.EXP.GNFS.ZS?format=json&date=2000:2023&per_page=100
+2026-03-04 15:35:21,728 - INFO -   ✅ importaciones_pct_pib: 24 registros
+2026-03-04 15:35:21,733 - INFO - Extracción completa: 168 filas | 7 países
+2026-03-04 15:35:21,735 - INFO - Transformación completada.
+2026-03-04 15:35:21,740 - INFO - 📁 CSV guardado: data/worldbank_pib.csv
+2026-03-04 15:35:21,742 - INFO - 📁 JSON guardado: data/worldbank_pib_raw.json
+2026-03-04 15:35:21,867 - WARNING - sqlalchemy/psycopg2 no instalados. Omitiendo carga a PostgreSQL.

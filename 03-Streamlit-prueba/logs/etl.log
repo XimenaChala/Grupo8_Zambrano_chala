@@ -1,0 +1,80 @@
+2026-02-20 14:21:58,599 - INFO - Iniciando extracción para 5 ciudades...
+2026-02-20 14:21:58,956 - INFO - ✅ Datos extraídos para Bogota
+2026-02-20 14:21:59,247 - ERROR - ❌ Error extrayendo datos para Medellin: 429 Client Error: Too Many Requests for url: https://api.weatherstack.com/current?access_key=c5f11171e79de9739252f509742d6b92&query=Medellin
+2026-02-20 14:21:59,550 - ERROR - ❌ Error extrayendo datos para Cali: 429 Client Error: Too Many Requests for url: https://api.weatherstack.com/current?access_key=c5f11171e79de9739252f509742d6b92&query=Cali
+2026-02-20 14:21:59,980 - INFO - ✅ Datos extraídos para Barranquilla
+2026-02-20 14:22:00,389 - ERROR - ❌ Error extrayendo datos para Cartagena: 429 Client Error: Too Many Requests for url: https://api.weatherstack.com/current?access_key=c5f11171e79de9739252f509742d6b92&query=Cartagena
+2026-02-20 14:22:00,391 - INFO - 📁 Datos guardados en data/clima_raw.json
+2026-02-20 14:22:00,394 - INFO - 📁 Datos guardados en data/clima.csv
+2026-02-20 14:23:27,464 - INFO - Iniciando extracción para 5 ciudades...
+2026-02-20 14:23:27,830 - INFO - ✅ Datos extraídos para Bogota
+2026-02-20 14:23:28,092 - ERROR - ❌ Error extrayendo datos para Medellin: 429 Client Error: Too Many Requests for url: https://api.weatherstack.com/current?access_key=c5f11171e79de9739252f509742d6b92&query=Medellin
+2026-02-20 14:23:28,395 - ERROR - ❌ Error extrayendo datos para Cali: 429 Client Error: Too Many Requests for url: https://api.weatherstack.com/current?access_key=c5f11171e79de9739252f509742d6b92&query=Cali
+2026-02-20 14:23:28,670 - ERROR - ❌ Error extrayendo datos para Barranquilla: 429 Client Error: Too Many Requests for url: https://api.weatherstack.com/current?access_key=c5f11171e79de9739252f509742d6b92&query=Barranquilla
+2026-02-20 14:23:28,977 - INFO - ✅ Datos extraídos para Cartagena
+2026-02-20 14:23:28,980 - INFO - 📁 Datos guardados en data/clima_raw.json
+2026-02-20 14:23:28,983 - INFO - 📁 Datos guardados en data/clima.csv
+2026-02-20 14:27:21,149 - INFO - Iniciando extracción para 5 ciudades...
+2026-02-20 14:27:21,706 - INFO - ✅ Datos extraídos para Bogota
+2026-02-20 14:27:21,960 - ERROR - ❌ Error extrayendo datos para Medellin: 429 Client Error: Too Many Requests for url: https://api.weatherstack.com/current?access_key=c5f11171e79de9739252f509742d6b92&query=Medellin
+2026-02-20 14:27:22,238 - ERROR - ❌ Error extrayendo datos para Cali: 429 Client Error: Too Many Requests for url: https://api.weatherstack.com/current?access_key=c5f11171e79de9739252f509742d6b92&query=Cali
+2026-02-20 14:27:22,831 - INFO - ✅ Datos extraídos para Barranquilla
+2026-02-20 14:27:23,078 - ERROR - ❌ Error extrayendo datos para Cartagena: 429 Client Error: Too Many Requests for url: https://api.weatherstack.com/current?access_key=c5f11171e79de9739252f509742d6b92&query=Cartagena
+2026-02-20 14:27:23,081 - INFO - 📁 Datos guardados en data/clima_raw.json
+2026-02-20 14:27:23,084 - INFO - 📁 Datos guardados en data/clima.csv
+2026-02-20 14:31:35,294 - INFO - Iniciando extracción para 5 ciudades...
+2026-02-20 14:31:35,581 - INFO - ✅ Datos extraídos para Bogota
+2026-02-20 14:31:38,019 - INFO - ✅ Datos extraídos para Medellin
+2026-02-20 14:31:40,322 - INFO - ✅ Datos extraídos para Cali
+2026-02-20 14:31:42,730 - INFO - ✅ Datos extraídos para Barranquilla
+2026-02-20 14:31:45,028 - INFO - ✅ Datos extraídos para Cartagena
+2026-02-20 14:31:47,032 - INFO - 📁 Datos guardados en data/clima_raw.json
+2026-02-20 14:31:47,036 - INFO - 📁 Datos guardados en data/clima.csv
+2026-02-20 14:36:01,925 - INFO - Iniciando extracción para 5 ciudades...
+2026-02-20 14:36:02,564 - INFO - ✅ Datos extraídos para Bogota
+2026-02-20 14:36:05,187 - INFO - ✅ Datos extraídos para Medellin
+2026-02-20 14:36:07,746 - INFO - ✅ Datos extraídos para Cali
+2026-02-20 14:36:10,409 - INFO - ✅ Datos extraídos para Barranquilla
+2026-02-20 14:36:12,969 - INFO - ✅ Datos extraídos para Cartagena
+2026-02-20 14:36:14,972 - INFO - 📁 Datos guardados en data/clima_raw.json
+2026-02-20 14:36:14,977 - INFO - 📁 Datos guardados en data/clima.csv
+2026-03-02 19:43:15,303 - INFO - Iniciando extracción para 5 ciudades...
+2026-03-02 19:43:16,642 - INFO - ✅ Datos extraídos para Bogota
+2026-03-02 19:43:19,406 - INFO - ✅ Datos extraídos para Medellin
+2026-03-02 19:43:22,170 - INFO - ✅ Datos extraídos para Cali
+2026-03-02 19:43:25,959 - INFO - ✅ Datos extraídos para Barranquilla
+2026-03-02 19:43:28,621 - INFO - ✅ Datos extraídos para Cartagena
+2026-03-02 19:43:30,624 - INFO - 📁 Datos guardados en data/clima_raw.json
+2026-03-02 19:43:30,630 - INFO - 📁 Datos guardados en data/clima.csv
+2026-03-02 23:03:44,361 - INFO - ✅ Datos extraídos: Bogota
+2026-03-02 23:03:46,942 - INFO - ✅ Datos extraídos: Medellin
+2026-03-02 23:03:49,578 - INFO - ✅ Datos extraídos: Cali
+2026-03-02 23:03:52,175 - INFO - ✅ Datos extraídos: Barranquilla
+2026-03-02 23:03:54,872 - INFO - ✅ Datos extraídos: Cartagena
+2026-03-02 23:03:56,879 - INFO - 📁 Archivo data/clima.csv actualizado con éxito.
+2026-04-10 16:31:04,740 - ERROR - Error general: (psycopg2.OperationalError) connection to server at "localhost" (127.0.0.1), port 5433 failed: Connection refused
+	Is the server running on that host and accepting TCP/IP connections?
+
+(Background on this error at: https://sqlalche.me/e/20/e3q8)
+2026-04-10 16:31:04,743 - ERROR - Error registrando métrica: (psycopg2.OperationalError) connection to server at "localhost" (127.0.0.1), port 5433 failed: Connection refused
+	Is the server running on that host and accepting TCP/IP connections?
+
+(Background on this error at: https://sqlalche.me/e/20/e3q8)
+2026-04-10 16:31:04,744 - INFO - ⏱  Tiempo total: 0.0s | Estado: error
+2026-04-10 16:33:36,752 - INFO - ✅ Tablas verificadas/creadas
+2026-04-10 16:33:36,766 - INFO - 📊 5 registros a procesar
+2026-04-10 16:33:37,126 - INFO - 🏙️  Ciudad registrada: Bogota
+2026-04-10 16:33:37,398 - INFO - 🏙️  Ciudad registrada: Medellin
+2026-04-10 16:33:37,659 - INFO - 🏙️  Ciudad registrada: Cali
+2026-04-10 16:33:37,921 - INFO - 🏙️  Ciudad registrada: Barranquilla
+2026-04-10 16:33:38,183 - INFO - 🏙️  Ciudad registrada: Cartagena
+2026-04-10 16:33:38,358 - INFO - ✅ Bulk insert completado: 5 registros guardados
+2026-04-10 16:33:38,359 - INFO - ✅ ETL completado — Guardados: 5 | Fallidos: 0
+2026-04-10 16:33:38,707 - INFO - 📋 Métrica registrada: exitoso
+2026-04-10 16:33:38,708 - INFO - ⏱  Tiempo total: 6.29s | Estado: exitoso
+2026-04-11 14:34:59,382 - INFO - ✅ Tablas verificadas/creadas
+2026-04-11 14:34:59,392 - INFO - 📊 1000 registros a procesar
+2026-04-11 14:35:00,903 - INFO - ✅ Bulk insert completado: 1000 registros guardados
+2026-04-11 14:35:00,903 - INFO - ✅ ETL completado — Guardados: 1000 | Fallidos: 0
+2026-04-11 14:35:01,251 - INFO - 📋 Métrica registrada: exitoso
+2026-04-11 14:35:01,251 - INFO - ⏱  Tiempo total: 3.36s | Estado: exitoso
