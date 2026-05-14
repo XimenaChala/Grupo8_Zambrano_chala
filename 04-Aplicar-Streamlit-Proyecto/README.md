@@ -142,3 +142,9 @@ El dashboard carga datos de dos fuentes en orden de prioridad:
 - **Sin API Key** — completamente gratuita
 - **Período:** 2000 – 2023
 - **Países:** CO, US, BR, MX, AR, CL, PE
+
+---
+
+## 🎥 Video Demo
+
+[▶️ Ver video de regresión](https://drive.google.com/file/d/19REbxRT4UcWCxDGq3VtdErEAAuZaSvTr/view?usp=drive_link)
